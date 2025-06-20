@@ -31,7 +31,7 @@
 <nav id="mainNav">
   <button onclick="showPage('home')">Home</button>
   <button onclick="showPage('days')">30 Days</button>
-  <button onclick="showPage('assessment')">Final Assessment</button>
+  <button id="assessmentBtn" onclick="tryShowAssessment()">Final Assessment</button>
   <button onclick="showPage('awards')">Awards & Certificate</button>
   <button onclick="logout()">Logout</button>
 </nav>
@@ -362,7 +362,14 @@ const finalMCQs = [
   { question: "Complete sentence?", options: ["Went store", "The dog barked", "Tall", "Sad."], correct: 1 },
   { question: "Which is a preposition?", options: ["Under", "Cat", "Blue", "Jump"], correct: 0 }
 ];
-
+function tryShowAssessment() {
+  const userData = users[currentUser].progress;
+  if (userData.completedDays < 30) {
+    alert("You must complete all 30 days to unlock the Final Assessment.");
+  } else {
+    showPage('assessment');
+  }
+}
 function saveUsers() { localStorage.setItem("users", JSON.stringify(users)); }
 function switchToSignup() { document.getElementById("login").classList.remove("active"); document.getElementById("signup").classList.add("active"); }
 function switchToLogin() { document.getElementById("signup").classList.remove("active"); document.getElementById("login").classList.add("active"); }
